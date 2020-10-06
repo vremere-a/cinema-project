@@ -24,14 +24,15 @@ public class Main {
         Movie movie = new Movie();
         movie.setTitle("Fast and Furious");
         movieService.add(movie);
-        movieService.getAll().forEach(System.out::println);
-        CinemaHallService cinemaHallService = (CinemaHallService) injector.getInstance(CinemaHallService.class);
         //add new cinemaHall
+        CinemaHallService cinemaHallService =
+                (CinemaHallService) injector.getInstance(CinemaHallService.class);
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setCapacity(100);
-        cinemaHall = cinemaHallService.add(cinemaHall);
+        cinemaHallService.add(cinemaHall);
         //add new MovieSession
-        MovieSessionService movieSessionService = (MovieSessionService) injector.getInstance(MovieSessionService.class);
+        MovieSessionService movieSessionService =
+                (MovieSessionService) injector.getInstance(MovieSessionService.class);
         MovieSession movieSession = new MovieSession();
         movieSession.setCinemaHall(cinemaHall);
         movieSession.setMovie(movie);
