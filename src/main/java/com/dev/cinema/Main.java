@@ -7,10 +7,8 @@ import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
@@ -18,29 +16,52 @@ public class Main {
     public static void main(String[] args) {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
+        Movie spiderMan = new Movie();
+        spiderMan.setTitle("Spider Man");
+        movieService.add(spiderMan);
+
+        Movie ironMan = new Movie();
+        ironMan.setTitle("Iron Man");
+        movieService.add(ironMan);
+
+        Movie flash = new Movie();
+        flash.setTitle("Flash");
+        movieService.add(flash);
+
         movieService.getAll().forEach(System.out::println);
 
-        //add new movie
-        Movie movie = new Movie();
-        movie.setTitle("Fast and Furious");
-        movieService.add(movie);
-        //add new cinemaHall
         CinemaHallService cinemaHallService =
                 (CinemaHallService) injector.getInstance(CinemaHallService.class);
-        CinemaHall cinemaHall = new CinemaHall();
-        cinemaHall.setCapacity(100);
-        cinemaHallService.add(cinemaHall);
-        //add new MovieSession
+        CinemaHall marvelHall = new CinemaHall();
+        marvelHall.setCapacity(100);
+        cinemaHallService.add(marvelHall);
+        cinemaHallService.getAll().forEach(System.out::println);
+
+        MovieSession spiderManSession = new MovieSession();
+        spiderManSession.setCinemaHall(marvelHall);
+        spiderManSession.setMovie(spiderMan);
         MovieSessionService movieSessionService =
                 (MovieSessionService) injector.getInstance(MovieSessionService.class);
-        MovieSession movieSession = new MovieSession();
-        movieSession.setCinemaHall(cinemaHall);
-        movieSession.setMovie(movie);
-        movieSession.setShowTime(LocalDateTime.of(LocalDate.now(), LocalTime.of(19,30)));
-        movieSessionService.add(movieSession);
+        spiderManSession.setShowTime(LocalDateTime.now());
+        movieSessionService.add(spiderManSession);
 
-        movieSessionService.findAvailableSessions(movie.getId(),LocalDate.now())
+        MovieSession ironManSession = new MovieSession();
+        ironManSession.setCinemaHall(marvelHall);
+        ironManSession.setMovie(ironMan);
+        ironManSession.setShowTime(LocalDateTime.now());
+        movieSessionService.add(ironManSession);
+
+        MovieSession flashSession = new MovieSession();
+        flashSession.setCinemaHall(marvelHall);
+        flashSession.setMovie(flash);
+        flashSession.setShowTime(LocalDateTime.now().plusMonths(2));
+        movieSessionService.add(flashSession);
+
+        movieSessionService.findAvailableSessions(spiderMan.getId(),LocalDate.now())
                 .forEach(System.out::println);
-
+        movieSessionService.findAvailableSessions(ironMan.getId(),LocalDate.now())
+                .forEach(System.out::println);
+        movieSessionService.findAvailableSessions(flash.getId(),LocalDate.now())
+                .forEach(System.out::println);
     }
 }

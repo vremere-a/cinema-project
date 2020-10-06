@@ -5,7 +5,6 @@ import com.dev.cinema.library.Inject;
 import com.dev.cinema.library.Service;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.service.MovieService;
-
 import java.util.List;
 
 @Service
