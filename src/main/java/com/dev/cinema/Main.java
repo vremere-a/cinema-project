@@ -42,13 +42,13 @@ public class Main {
         spiderManSession.setMovie(spiderMan);
         MovieSessionService movieSessionService =
                 (MovieSessionService) injector.getInstance(MovieSessionService.class);
-        spiderManSession.setShowTime(LocalDateTime.now());
+        spiderManSession.setShowTime(LocalDateTime.now().plusMonths(5));
         movieSessionService.add(spiderManSession);
 
         MovieSession ironManSession = new MovieSession();
         ironManSession.setCinemaHall(marvelHall);
         ironManSession.setMovie(ironMan);
-        ironManSession.setShowTime(LocalDateTime.now());
+        ironManSession.setShowTime(LocalDateTime.now().plusMonths(3));
         movieSessionService.add(ironManSession);
 
         MovieSession flashSession = new MovieSession();
