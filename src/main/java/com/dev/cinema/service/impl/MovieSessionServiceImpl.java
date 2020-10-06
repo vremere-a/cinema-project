@@ -1,13 +1,18 @@
-package com.dev.cinema.dao.impl;
+package com.dev.cinema.service.impl;
 
 import com.dev.cinema.dao.MovieSessionDao;
-import com.dev.cinema.library.Dao;
+import com.dev.cinema.library.Inject;
+import com.dev.cinema.library.Service;
 import com.dev.cinema.model.MovieSession;
+import com.dev.cinema.service.MovieSessionService;
 import java.time.LocalDate;
 import java.util.List;
 
-@Dao
-public class MovieSessionDaoImpl implements MovieSessionDao {
+@Service
+public class MovieSessionServiceImpl implements MovieSessionService {
+    @Inject
+    private MovieSessionDao movieSessionDao;
+
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
         return null;
