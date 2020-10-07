@@ -12,6 +12,8 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.Optional;
+
 @Dao
 public class UserDaoImpl implements UserDao {
     @Override
@@ -38,14 +40,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
             Root<User> userEmailRoot = criteriaQuery.from(User.class);
             Predicate predicate = criteriaBuilder.equal(userEmailRoot.get("email"), email);
             criteriaQuery.select(userEmailRoot).where(predicate);
-            return session.createQuery(criteriaQuery).uniqueResult();
+            return Optional.ofNullable(session.createQuery(criteriaQuery).uniqueResult());
         } catch (Exception e) {
             throw new DataProcessingException("Can't find email", e);
         }
