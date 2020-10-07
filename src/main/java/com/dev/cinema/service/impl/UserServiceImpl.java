@@ -5,6 +5,7 @@ import com.dev.cinema.library.Inject;
 import com.dev.cinema.library.Service;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.UserService;
+import com.dev.cinema.util.HashUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -13,11 +14,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User add(User user) {
-        return null;
+        user.setSalt(HashUtil.getSalt());
+        user.setPassword(HashUtil.hashPassword(user.getPassword(), user.getSalt()));
+        return userDao.add(user);
     }
 
     @Override
     public User findByEmail(String email) {
-        return null;
+        return userDao.findByEmail(email);
     }
 }
