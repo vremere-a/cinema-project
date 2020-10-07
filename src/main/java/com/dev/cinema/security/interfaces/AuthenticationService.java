@@ -1,6 +1,5 @@
 package com.dev.cinema.security.interfaces;
 
-
 import com.dev.cinema.exeptions.AuthenticationException;
 import com.dev.cinema.model.User;
 

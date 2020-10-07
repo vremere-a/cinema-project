@@ -1,10 +1,9 @@
 package com.dev.cinema.util;
 
-import lombok.SneakyThrows;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import lombok.SneakyThrows;
 
 public class HashUtil {
     private static final String HASH_ALGORITHM = "SHA-512";
