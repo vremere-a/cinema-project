@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add user entity with id"
+            throw new DataProcessingException("Can't add user entity"
                     + user.getId(), e);
         } finally {
             if (session != null) {
@@ -46,9 +46,7 @@ public class UserDaoImpl implements UserDao {
             Root<User> userEmailRoot = criteriaQuery.from(User.class);
             Predicate predicate = criteriaBuilder.equal(userEmailRoot.get("email"), email);
             criteriaQuery.select(userEmailRoot).where(predicate);
-            return Optional.ofNullable(session.createQuery(criteriaQuery).uniqueResult());
-        } catch (Exception e) {
-            throw new DataProcessingException("Can't find email", e);
+            return session.createQuery(criteriaQuery).uniqueResultOptional();
         }
     }
 }

@@ -3,7 +3,6 @@ package com.dev.cinema.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import lombok.SneakyThrows;
 
 public class HashUtil {
     private static final String HASH_ALGORITHM = "SHA-512";
@@ -15,8 +14,7 @@ public class HashUtil {
         return salt;
     }
 
-    @SneakyThrows
-    public static String hashPassword(String password, byte[] salt) {
+    public static String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException {
         StringBuilder hashPassword = new StringBuilder();
         try {
             MessageDigest messageDigest = MessageDigest.getInstance(HASH_ALGORITHM);
