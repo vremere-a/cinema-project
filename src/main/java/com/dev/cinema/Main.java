@@ -2,10 +2,17 @@ package com.dev.cinema;
 
 import com.dev.cinema.exeptions.AuthenticationException;
 import com.dev.cinema.library.Injector;
-import com.dev.cinema.model.*;
+import com.dev.cinema.model.CinemaHall;
+import com.dev.cinema.model.Movie;
+import com.dev.cinema.model.MovieSession;
+import com.dev.cinema.model.ShoppingCart;
+import com.dev.cinema.model.User;
 import com.dev.cinema.security.interfaces.AuthenticationService;
-import com.dev.cinema.service.*;
-
+import com.dev.cinema.service.CinemaHallService;
+import com.dev.cinema.service.MovieService;
+import com.dev.cinema.service.MovieSessionService;
+import com.dev.cinema.service.ShoppingCartService;
+import com.dev.cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -85,19 +92,5 @@ public class Main {
         shoppingCartService.addSession(ironManSession,user2);
         shoppingCartService.addSession(spiderManSession,user2);
         System.out.println(shoppingCartService.getByUser(user2));
-
-//        Ticket user2Ticket = new Ticket();
-//        user2Ticket.setUser(user2);
-//        user2Ticket.setMovieSession(ironManSession);
-//
-//
-//        shoppingCartService.registerNewShoppingCart(user2);
-//        shoppingCartService.addSession(ironManSession, user2);
-//
-//        ShoppingCart shoppingCart = new ShoppingCart();
-//        ShoppingCart userShoppingCart = shoppingCartService.getByUser(user2);
-//        System.out.println(userShoppingCart);
-
-
     }
 }

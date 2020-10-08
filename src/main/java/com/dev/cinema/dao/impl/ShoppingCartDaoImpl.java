@@ -3,15 +3,16 @@ package com.dev.cinema.dao.impl;
 import com.dev.cinema.dao.ShoppingCartDao;
 import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.library.Dao;
-import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.User;
 import com.dev.cinema.util.HibernateUtil;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
-
-import javax.persistence.criteria.*;
 
 @Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
@@ -67,7 +68,8 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't update shoppingCart entity with id " + shoppingCart.getId(), e);
+            throw new DataProcessingException("Can't update shoppingCart entity with id "
+                    + shoppingCart.getId(), e);
         } finally {
             if (session != null) {
                 session.close();
