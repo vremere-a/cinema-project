@@ -20,4 +20,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public void registerNewShoppingCart(User user) {
 
     }
+
+    @Override
+    public void clear(ShoppingCart shoppingCart) {
+
+    }
 }
