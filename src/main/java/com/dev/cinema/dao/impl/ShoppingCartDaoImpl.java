@@ -5,9 +5,15 @@ import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.library.Dao;
 import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.User;
+import com.dev.cinema.util.HashUtil;
 import com.dev.cinema.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 @Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
@@ -35,7 +41,16 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     @Override
     public ShoppingCart getByUser(User user) {
-        return null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<ShoppingCart> shoppingCartCriteriaQuery =
+                    criteriaBuilder.createQuery(ShoppingCart.class);
+            Root<ShoppingCart> shoppingCartRoot =
+                    shoppingCartCriteriaQuery.from(ShoppingCart.class);
+            Predicate predicate = criteriaBuilder.equal(shoppingCartRoot.get("user"), user);
+            shoppingCartCriteriaQuery.select(shoppingCartRoot).where(predicate);
+            return session.createQuery(shoppingCartCriteriaQuery).getSingleResult();
+        }
     }
 
     @Override
