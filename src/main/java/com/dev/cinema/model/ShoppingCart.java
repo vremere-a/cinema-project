@@ -9,14 +9,14 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "shopping cart")
+@Table(name = "shopping_cart")
 public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany
     private List<Ticket> tickets;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToOne
     @MapsId
     @JoinColumn(name = "id")
     private User user;

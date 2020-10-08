@@ -1,21 +1,18 @@
 package com.dev.cinema;
 
+import com.dev.cinema.exeptions.AuthenticationException;
 import com.dev.cinema.library.Injector;
-import com.dev.cinema.model.CinemaHall;
-import com.dev.cinema.model.Movie;
-import com.dev.cinema.model.MovieSession;
-import com.dev.cinema.model.User;
-import com.dev.cinema.service.CinemaHallService;
-import com.dev.cinema.service.MovieService;
-import com.dev.cinema.service.MovieSessionService;
-import com.dev.cinema.service.UserService;
+import com.dev.cinema.model.*;
+import com.dev.cinema.security.interfaces.AuthenticationService;
+import com.dev.cinema.service.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AuthenticationException {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
         Movie spiderMan = new Movie();
@@ -59,18 +56,48 @@ public class Main {
         flashSession.setShowTime(LocalDateTime.now().plusMonths(2));
         movieSessionService.add(flashSession);
 
-        movieSessionService.findAvailableSessions(spiderMan.getId(),LocalDate.now())
+        movieSessionService.findAvailableSessions(spiderMan.getId(), LocalDate.now())
                 .forEach(System.out::println);
-        movieSessionService.findAvailableSessions(ironMan.getId(),LocalDate.now())
+        movieSessionService.findAvailableSessions(ironMan.getId(), LocalDate.now())
                 .forEach(System.out::println);
-        movieSessionService.findAvailableSessions(flash.getId(),LocalDate.now())
+        movieSessionService.findAvailableSessions(flash.getId(), LocalDate.now())
                 .forEach(System.out::println);
+
         UserService userService = (UserService) injector.getInstance(UserService.class);
         User user1 = new User();
         user1.setEmail("arts@ukr.net");
         user1.setPassword("123");
         userService.add(user1);
         System.out.println(userService.findByEmail(user1.getEmail()));
+
+        AuthenticationService authenticationService =
+                (AuthenticationService) injector.getInstance(AuthenticationService.class);
+        authenticationService.register("arts2@ukr.net", "1234");
+        System.out.println(authenticationService.login("arts2@ukr.net", "1234"));
+
+        User user2 = userService.findByEmail("arts2@ukr.net").get();
+
+        ShoppingCartService shoppingCartService =
+                (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+        ShoppingCart userShoppingCart = shoppingCartService.getByUser(user2);
+        System.out.println(userShoppingCart);
+
+        shoppingCartService.addSession(ironManSession,user2);
+        shoppingCartService.addSession(spiderManSession,user2);
+        System.out.println(shoppingCartService.getByUser(user2));
+
+//        Ticket user2Ticket = new Ticket();
+//        user2Ticket.setUser(user2);
+//        user2Ticket.setMovieSession(ironManSession);
+//
+//
+//        shoppingCartService.registerNewShoppingCart(user2);
+//        shoppingCartService.addSession(ironManSession, user2);
+//
+//        ShoppingCart shoppingCart = new ShoppingCart();
+//        ShoppingCart userShoppingCart = shoppingCartService.getByUser(user2);
+//        System.out.println(userShoppingCart);
+
 
     }
 }

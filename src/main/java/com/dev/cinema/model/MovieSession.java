@@ -20,6 +20,4 @@ public class MovieSession {
     @ManyToOne
     private CinemaHall cinemaHall;
     private LocalDateTime showTime;
-    @OneToOne
-    private Ticket ticket;
 }

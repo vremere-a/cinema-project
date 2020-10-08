@@ -6,6 +6,7 @@ import com.dev.cinema.library.Inject;
 import com.dev.cinema.library.Service;
 import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.model.ShoppingCart;
+import com.dev.cinema.model.Ticket;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.ShoppingCartService;
 
@@ -18,8 +19,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void addSession(MovieSession movieSession, User user) {
-        ticketDao.add(movieSession.getTicket());
-        shoppingCartDao.getByUser(user);
+        Ticket ticket = new Ticket();
+        ticket.setMovieSession(movieSession);
+        ticket.setUser(user);
+        ticketDao.add(ticket);
+        ShoppingCart shoppingCart = shoppingCartDao.getByUser(user);;
+        shoppingCart.getTickets().add(ticket);
+        shoppingCartDao.update(shoppingCart);
     }
 
     @Override
