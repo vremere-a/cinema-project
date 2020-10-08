@@ -14,7 +14,7 @@ public class HashUtil {
         return salt;
     }
 
-    public static String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException {
+    public static String hashPassword(String password, byte[] salt) {
         StringBuilder hashPassword = new StringBuilder();
         try {
             MessageDigest messageDigest = MessageDigest.getInstance(HASH_ALGORITHM);
@@ -24,7 +24,7 @@ public class HashUtil {
                 hashPassword.append(String.format("%02x", b));
             }
         } catch (NoSuchAlgorithmException e) {
-            throw new NoSuchAlgorithmException("error", e);
+            throw new RuntimeException("Can't get hash from password", e);
         }
         return hashPassword.toString();
     }
