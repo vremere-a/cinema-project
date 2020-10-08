@@ -5,11 +5,9 @@ import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.library.Dao;
 import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.User;
-import com.dev.cinema.util.HashUtil;
 import com.dev.cinema.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;

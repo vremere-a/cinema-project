@@ -1,6 +1,7 @@
 package com.dev.cinema.service.impl;
 
 import com.dev.cinema.dao.ShoppingCartDao;
+import com.dev.cinema.dao.TicketDao;
 import com.dev.cinema.library.Inject;
 import com.dev.cinema.library.Service;
 import com.dev.cinema.model.MovieSession;
@@ -12,15 +13,18 @@ import com.dev.cinema.service.ShoppingCartService;
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Inject
     ShoppingCartDao shoppingCartDao;
+    @Inject
+    TicketDao ticketDao;
 
     @Override
     public void addSession(MovieSession movieSession, User user) {
-
+        ticketDao.add(movieSession.getTicket());
+        shoppingCartDao.getByUser(user);
     }
 
     @Override
     public ShoppingCart getByUser(User user) {
-        return null;
+        return shoppingCartDao.getByUser(user);
     }
 
     @Override
