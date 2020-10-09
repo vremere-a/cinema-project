@@ -92,5 +92,6 @@ public class Main {
         shoppingCartService.addSession(ironManSession,user2);
         shoppingCartService.addSession(spiderManSession,user2);
         System.out.println(shoppingCartService.getByUser(user2));
+        shoppingCartService.clear(shoppingCartService.getByUser(user2));
     }
 }
