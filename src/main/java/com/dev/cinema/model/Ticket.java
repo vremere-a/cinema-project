@@ -22,6 +22,6 @@ public class Ticket {
     private MovieSession movieSession;
     @OneToOne
     private User user;
-    @ManyToOne()
+    @ManyToOne
     private ShoppingCart shoppingCart;
 }
