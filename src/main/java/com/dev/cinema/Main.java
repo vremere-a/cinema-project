@@ -84,12 +84,23 @@ public class Main {
 
         User user2 = userService.findByEmail("arts2@ukr.net").get();
 
+        authenticationService.register("arts3@ukr.net", "12345");
+        System.out.println(authenticationService.login("arts3@ukr.net", "12345"));
+
+        User user3 = userService.findByEmail("arts3@ukr.net").get();
+
         ShoppingCartService shoppingCartService =
                 (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
-        ShoppingCart userShoppingCart = shoppingCartService.getByUser(user2);
-        System.out.println(userShoppingCart);
+        ShoppingCart userShoppingCart3 = shoppingCartService.getByUser(user3);
+        ShoppingCart userShoppingCart2 = shoppingCartService.getByUser(user2);
+        System.out.println(userShoppingCart3);
+        System.out.println(userShoppingCart2);
 
-        shoppingCartService.addSession(ironManSession,user2);
+        shoppingCartService.addSession(ironManSession,user3);
+        shoppingCartService.addSession(spiderManSession,user3);
+        System.out.println(shoppingCartService.getByUser(user3));
+
+        shoppingCartService.addSession(flashSession,user2);
         shoppingCartService.addSession(spiderManSession,user2);
         System.out.println(shoppingCartService.getByUser(user2));
         shoppingCartService.clear(shoppingCartService.getByUser(user2));

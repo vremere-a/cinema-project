@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 public class ShoppingCart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany
