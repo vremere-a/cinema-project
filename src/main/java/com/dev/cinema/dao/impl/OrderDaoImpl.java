@@ -30,8 +30,8 @@ public class OrderDaoImpl implements OrderDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add order entity with id"
-                    + order.getId(), e);
+            throw new DataProcessingException("Can't add order entity:"
+                    + order, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -51,7 +51,7 @@ public class OrderDaoImpl implements OrderDao {
             Predicate predicate =
                     criteriaBuilder.equal(orderRoot.get("user"), user);
             orderCriteriaQuery.select(orderRoot).where(predicate);
-            return session.createQuery(orderCriteriaQuery).getResultList();
+            return session.createQuery(orderCriteriaQuery.distinct(true)).getResultList();
         }
     }
 }
