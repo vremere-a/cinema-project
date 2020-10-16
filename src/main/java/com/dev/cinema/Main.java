@@ -1,7 +1,6 @@
 package com.dev.cinema;
 
 import com.dev.cinema.exeptions.AuthenticationException;
-import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.library.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
