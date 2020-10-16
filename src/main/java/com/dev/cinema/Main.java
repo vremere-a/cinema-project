@@ -1,6 +1,7 @@
 package com.dev.cinema;
 
 import com.dev.cinema.exeptions.AuthenticationException;
+import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.library.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
@@ -86,12 +87,20 @@ public class Main {
         AuthenticationService authenticationService =
                 (AuthenticationService) injector.getInstance(AuthenticationService.class);
         authenticationService.register("arts2@ukr.net", "1234");
-        log.info(authenticationService.login("arts2@ukr.net", "1234"));
+        try {
+            authenticationService.login("arts2@ukr.net", "1234");
+        } catch (AuthenticationException e) {
+            log.warn("Incorrect username or password");
+        }
 
         User user2 = userService.findByEmail("arts2@ukr.net").get();
 
         authenticationService.register("arts3@ukr.net", "12345");
-        log.info(authenticationService.login("arts3@ukr.net", "12345"));
+        try {
+            authenticationService.login("arts3@ukr.net", "12345");
+        } catch (AuthenticationException e) {
+            log.warn("Incorrect username or password");
+        }
 
         User user3 = userService.findByEmail("arts3@ukr.net").get();
 
@@ -108,7 +117,7 @@ public class Main {
 
         shoppingCartService.addSession(flashSession, user2);
         shoppingCartService.addSession(spiderManSession, user2);
-        log.info("show Shopping cart by user # 3 " + shoppingCartService.getByUser(user2));
+        log.info("show Shopping cart by user # 2 " + shoppingCartService.getByUser(user2));
         shoppingCartService.clear(shoppingCartService.getByUser(user2));
 
         OrderService orderService =
