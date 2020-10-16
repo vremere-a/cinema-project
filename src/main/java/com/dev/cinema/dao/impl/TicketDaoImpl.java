@@ -5,9 +5,11 @@ import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.library.Dao;
 import com.dev.cinema.model.Ticket;
 import com.dev.cinema.util.HibernateUtil;
+import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+@Log4j
 @Dao
 public class TicketDaoImpl implements TicketDao {
     @Override
@@ -19,6 +21,7 @@ public class TicketDaoImpl implements TicketDao {
             transaction = session.beginTransaction();
             session.save(ticket);
             transaction.commit();
+            log.info("Entity " + ticket + "successful added from the DB");
             return ticket;
         } catch (Exception e) {
             if (transaction != null) {

@@ -12,9 +12,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
+import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+@Log4j
 @Dao
 public class MovieSessionDaoImpl implements MovieSessionDao {
     @Override
@@ -44,6 +47,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             transaction = session.beginTransaction();
             session.save(movieSession);
             transaction.commit();
+            log.info("Entity " + movieSession + "successful added from the DB");
             return movieSession;
         } catch (Exception e) {
             if (transaction != null) {
