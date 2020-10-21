@@ -12,11 +12,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final ShoppingCartService shoppingCartService;
 
     @Autowired
-    private ShoppingCartService shoppingCartService;
+    public AuthenticationServiceImpl(UserService userService, ShoppingCartService shoppingCartService) {
+        this.userService = userService;
+        this.shoppingCartService = shoppingCartService;
+    }
 
     @Override
     public User login(String email, String password) throws AuthenticationException {

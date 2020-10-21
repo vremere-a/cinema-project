@@ -13,10 +13,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+    private final OrderDao orderDao;
+    private final ShoppingCartService shoppingCartService;
+
     @Autowired
-    private OrderDao orderDao;
-    @Autowired
-    private ShoppingCartService shoppingCartService;
+    public OrderServiceImpl(OrderDao orderDao, ShoppingCartService shoppingCartService) {
+        this.orderDao = orderDao;
+        this.shoppingCartService = shoppingCartService;
+    }
 
     @Override
     public Order completeOrder(List<Ticket> tickets, User user) {
