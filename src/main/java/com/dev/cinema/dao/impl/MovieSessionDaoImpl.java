@@ -3,7 +3,6 @@ package com.dev.cinema.dao.impl;
 import com.dev.cinema.dao.MovieSessionDao;
 import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.model.MovieSession;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -23,10 +22,12 @@ import org.springframework.stereotype.Repository;
 public class MovieSessionDaoImpl implements MovieSessionDao {
 
     private final SessionFactory sessionFactory;
+
     @Autowired
     public MovieSessionDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
         try (Session session = sessionFactory.openSession()) {

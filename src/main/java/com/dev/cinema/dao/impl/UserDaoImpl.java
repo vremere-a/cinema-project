@@ -3,7 +3,6 @@ package com.dev.cinema.dao.impl;
 import com.dev.cinema.dao.UserDao;
 import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.model.User;
-
 import java.util.Optional;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -21,10 +20,12 @@ import org.springframework.stereotype.Repository;
 public class UserDaoImpl implements UserDao {
 
     private final SessionFactory sessionFactory;
+
     @Autowired
     public UserDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
     @Override
     public User add(User user) {
         Transaction transaction = null;

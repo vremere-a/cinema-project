@@ -3,7 +3,6 @@ package com.dev.cinema.dao.impl;
 import com.dev.cinema.dao.MovieDao;
 import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.model.Movie;
-
 import java.util.List;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Repository;
 public class MovieDaoImpl implements MovieDao {
 
     private final SessionFactory sessionFactory;
+
     @Autowired
     public MovieDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

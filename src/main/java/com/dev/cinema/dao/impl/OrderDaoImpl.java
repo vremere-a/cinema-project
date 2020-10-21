@@ -21,10 +21,12 @@ import org.springframework.stereotype.Repository;
 public class OrderDaoImpl implements OrderDao {
 
     private final SessionFactory sessionFactory;
+
     @Autowired
     public OrderDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
     @Override
     public Order add(Order order) {
         Transaction transaction = null;

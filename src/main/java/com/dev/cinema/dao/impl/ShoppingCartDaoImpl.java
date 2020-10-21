@@ -4,7 +4,6 @@ import com.dev.cinema.dao.ShoppingCartDao;
 import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.User;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
@@ -22,10 +21,12 @@ import org.springframework.stereotype.Repository;
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     private final SessionFactory sessionFactory;
+
     @Autowired
     public ShoppingCartDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
     @Override
     public ShoppingCart add(ShoppingCart shoppingCart) {
         Transaction transaction = null;
