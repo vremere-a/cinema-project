@@ -20,7 +20,6 @@ import org.springframework.stereotype.Repository;
 @Log4j
 @Repository
 public class MovieSessionDaoImpl implements MovieSessionDao {
-
     private final SessionFactory sessionFactory;
 
     @Autowired

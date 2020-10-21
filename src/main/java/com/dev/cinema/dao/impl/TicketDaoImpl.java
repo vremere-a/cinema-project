@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 @Log4j
 @Repository
 public class TicketDaoImpl implements TicketDao {
-
     private final SessionFactory sessionFactory;
 
     @Autowired

@@ -19,7 +19,6 @@ import org.springframework.stereotype.Repository;
 @Log4j
 @Repository
 public class OrderDaoImpl implements OrderDao {
-
     private final SessionFactory sessionFactory;
 
     @Autowired
