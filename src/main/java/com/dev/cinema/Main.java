@@ -16,11 +16,14 @@ import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
 
     public static void main(String[] args) throws AuthenticationException {
+        log.info("APPLICATION START WORK");
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
         Movie spiderMan = new Movie();
@@ -34,15 +37,16 @@ public class Main {
         Movie flash = new Movie();
         flash.setTitle("Flash");
         movieService.add(flash);
-
-        movieService.getAll().forEach(System.out::println);
+        log.info("Getting all movie title");
+        movieService.getAll().forEach(log::info);
 
         CinemaHallService cinemaHallService =
                 (CinemaHallService) injector.getInstance(CinemaHallService.class);
         CinemaHall marvelHall = new CinemaHall();
         marvelHall.setCapacity(100);
         cinemaHallService.add(marvelHall);
-        cinemaHallService.getAll().forEach(System.out::println);
+        log.info("Getting all cinemaHall");
+        cinemaHallService.getAll().forEach(log::info);
 
         MovieSession spiderManSession = new MovieSession();
         spiderManSession.setCinemaHall(marvelHall);
@@ -64,29 +68,38 @@ public class Main {
         flashSession.setShowTime(LocalDateTime.now().plusMonths(2));
         movieSessionService.add(flashSession);
 
+        log.info("Getting all Available Sessions");
         movieSessionService.findAvailableSessions(spiderMan.getId(), LocalDate.now())
-                .forEach(System.out::println);
+                .forEach(log::info);
         movieSessionService.findAvailableSessions(ironMan.getId(), LocalDate.now())
-                .forEach(System.out::println);
+                .forEach(log::info);
         movieSessionService.findAvailableSessions(flash.getId(), LocalDate.now())
-                .forEach(System.out::println);
+                .forEach(log::info);
 
         UserService userService = (UserService) injector.getInstance(UserService.class);
         User user1 = new User();
         user1.setEmail("arts@ukr.net");
         user1.setPassword("123");
         userService.add(user1);
-        System.out.println(userService.findByEmail(user1.getEmail()));
+        log.info("Find User by email " + userService.findByEmail(user1.getEmail()));
 
         AuthenticationService authenticationService =
                 (AuthenticationService) injector.getInstance(AuthenticationService.class);
         authenticationService.register("arts2@ukr.net", "1234");
-        System.out.println(authenticationService.login("arts2@ukr.net", "1234"));
+        try {
+            authenticationService.login("arts2@ukr.net", "1234");
+        } catch (AuthenticationException e) {
+            log.warn("Incorrect username or password");
+        }
 
         User user2 = userService.findByEmail("arts2@ukr.net").get();
 
         authenticationService.register("arts3@ukr.net", "12345");
-        System.out.println(authenticationService.login("arts3@ukr.net", "12345"));
+        try {
+            authenticationService.login("arts3@ukr.net", "12345");
+        } catch (AuthenticationException e) {
+            log.warn("Incorrect username or password");
+        }
 
         User user3 = userService.findByEmail("arts3@ukr.net").get();
 
@@ -94,21 +107,23 @@ public class Main {
                 (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
         ShoppingCart userShoppingCart3 = shoppingCartService.getByUser(user3);
         ShoppingCart userShoppingCart2 = shoppingCartService.getByUser(user2);
-        System.out.println(userShoppingCart3);
-        System.out.println(userShoppingCart2);
+        log.info("show Shopping cart by user # 3 " + userShoppingCart3);
+        log.info("show Shopping cart by user # 2 " + userShoppingCart2);
 
-        shoppingCartService.addSession(ironManSession,user3);
-        shoppingCartService.addSession(spiderManSession,user3);
-        System.out.println(shoppingCartService.getByUser(user3));
+        shoppingCartService.addSession(ironManSession, user3);
+        shoppingCartService.addSession(spiderManSession, user3);
+        log.info("show Shopping cart by user # 3 " + shoppingCartService.getByUser(user3));
 
-        shoppingCartService.addSession(flashSession,user2);
-        shoppingCartService.addSession(spiderManSession,user2);
-        System.out.println(shoppingCartService.getByUser(user2));
+        shoppingCartService.addSession(flashSession, user2);
+        shoppingCartService.addSession(spiderManSession, user2);
+        log.info("show Shopping cart by user # 2 " + shoppingCartService.getByUser(user2));
         shoppingCartService.clear(shoppingCartService.getByUser(user2));
 
         OrderService orderService =
                 (OrderService) injector.getInstance(OrderService.class);
         orderService.completeOrder(shoppingCartService.getByUser(user3).getTickets(), user3);
-        orderService.getOrderHistory(user3).forEach(System.out::println);
+        log.info("getting all order history");
+        orderService.getOrderHistory(user3).forEach(log::info);
+        log.info("APPLICATION EXITS");
     }
 }

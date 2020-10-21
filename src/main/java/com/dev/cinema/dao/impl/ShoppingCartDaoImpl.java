@@ -11,9 +11,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+@Log4j
 @Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
     @Override
@@ -25,6 +27,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             transaction = session.beginTransaction();
             session.save(shoppingCart);
             transaction.commit();
+            log.info("Entity " + shoppingCart + "successful added from the DB");
             return shoppingCart;
         } catch (Exception e) {
             if (transaction != null) {

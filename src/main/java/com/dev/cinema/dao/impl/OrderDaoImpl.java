@@ -11,9 +11,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+@Log4j
 @Dao
 public class OrderDaoImpl implements OrderDao {
     @Override
@@ -25,6 +27,7 @@ public class OrderDaoImpl implements OrderDao {
             transaction = session.beginTransaction();
             session.save(order);
             transaction.commit();
+            log.info("Entity " + order + "successful added from the DB");
             return order;
         } catch (Exception e) {
             if (transaction != null) {

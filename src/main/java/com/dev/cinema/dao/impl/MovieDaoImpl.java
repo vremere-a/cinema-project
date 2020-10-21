@@ -6,10 +6,12 @@ import com.dev.cinema.library.Dao;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.util.HibernateUtil;
 import java.util.List;
+import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+@Log4j
 @Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
@@ -21,6 +23,7 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
+            log.info("Entity " + movie + "successful added from the DB");
             return movie;
         } catch (Exception e) {
             if (transaction != null) {
