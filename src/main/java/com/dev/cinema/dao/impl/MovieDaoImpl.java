@@ -4,6 +4,9 @@ import com.dev.cinema.dao.MovieDao;
 import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.model.Movie;
 import java.util.List;
+
+import com.dev.cinema.model.ShoppingCart;
+import com.dev.cinema.model.User;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,6 +14,8 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.criteria.*;
 
 @Log4j
 @Repository
@@ -52,6 +57,18 @@ public class MovieDaoImpl implements MovieDao {
             return getAllMoviesQuery.getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Can't show all movies", e);
+        }
+    }
+
+    @Override
+    public Movie getById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Movie> criteriaQuery = criteriaBuilder.createQuery(Movie.class);
+            Root<Movie> movieRoot = criteriaQuery.from(Movie.class);
+            Predicate predicate = criteriaBuilder.equal(movieRoot.get("id"), id);
+            criteriaQuery.select(movieRoot).where(predicate);
+            return session.createQuery(criteriaQuery).getSingleResult();
         }
     }
 }
