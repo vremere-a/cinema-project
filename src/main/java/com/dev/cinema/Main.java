@@ -1,7 +1,7 @@
 package com.dev.cinema;
 
+import com.dev.cinema.config.AppConfig;
 import com.dev.cinema.exeptions.AuthenticationException;
-import com.dev.cinema.library.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
@@ -17,14 +17,17 @@ import com.dev.cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.extern.log4j.Log4j;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @Log4j
 public class Main {
-    private static Injector injector = Injector.getInstance("com.dev.cinema");
+    private static final AnnotationConfigApplicationContext context =
+            new AnnotationConfigApplicationContext(AppConfig.class);
 
     public static void main(String[] args) throws AuthenticationException {
+
         log.info("APPLICATION START WORK");
-        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
+        MovieService movieService = context.getBean(MovieService.class);
 
         Movie spiderMan = new Movie();
         spiderMan.setTitle("Spider Man");
@@ -40,8 +43,7 @@ public class Main {
         log.info("Getting all movie title");
         movieService.getAll().forEach(log::info);
 
-        CinemaHallService cinemaHallService =
-                (CinemaHallService) injector.getInstance(CinemaHallService.class);
+        CinemaHallService cinemaHallService = context.getBean(CinemaHallService.class);
         CinemaHall marvelHall = new CinemaHall();
         marvelHall.setCapacity(100);
         cinemaHallService.add(marvelHall);
@@ -51,8 +53,7 @@ public class Main {
         MovieSession spiderManSession = new MovieSession();
         spiderManSession.setCinemaHall(marvelHall);
         spiderManSession.setMovie(spiderMan);
-        MovieSessionService movieSessionService =
-                (MovieSessionService) injector.getInstance(MovieSessionService.class);
+        MovieSessionService movieSessionService = context.getBean(MovieSessionService.class);
         spiderManSession.setShowTime(LocalDateTime.now().plusMonths(5));
         movieSessionService.add(spiderManSession);
 
@@ -76,15 +77,14 @@ public class Main {
         movieSessionService.findAvailableSessions(flash.getId(), LocalDate.now())
                 .forEach(log::info);
 
-        UserService userService = (UserService) injector.getInstance(UserService.class);
+        UserService userService = context.getBean(UserService.class);
         User user1 = new User();
         user1.setEmail("arts@ukr.net");
         user1.setPassword("123");
         userService.add(user1);
         log.info("Find User by email " + userService.findByEmail(user1.getEmail()));
 
-        AuthenticationService authenticationService =
-                (AuthenticationService) injector.getInstance(AuthenticationService.class);
+        AuthenticationService authenticationService = context.getBean(AuthenticationService.class);
         authenticationService.register("arts2@ukr.net", "1234");
         try {
             authenticationService.login("arts2@ukr.net", "1234");
@@ -103,8 +103,7 @@ public class Main {
 
         User user3 = userService.findByEmail("arts3@ukr.net").get();
 
-        ShoppingCartService shoppingCartService =
-                (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+        ShoppingCartService shoppingCartService = context.getBean(ShoppingCartService.class);
         ShoppingCart userShoppingCart3 = shoppingCartService.getByUser(user3);
         ShoppingCart userShoppingCart2 = shoppingCartService.getByUser(user2);
         log.info("show Shopping cart by user # 3 " + userShoppingCart3);
@@ -119,8 +118,7 @@ public class Main {
         log.info("show Shopping cart by user # 2 " + shoppingCartService.getByUser(user2));
         shoppingCartService.clear(shoppingCartService.getByUser(user2));
 
-        OrderService orderService =
-                (OrderService) injector.getInstance(OrderService.class);
+        OrderService orderService = context.getBean(OrderService.class);
         orderService.completeOrder(shoppingCartService.getByUser(user3).getTickets(), user3);
         log.info("getting all order history");
         orderService.getOrderHistory(user3).forEach(log::info);
