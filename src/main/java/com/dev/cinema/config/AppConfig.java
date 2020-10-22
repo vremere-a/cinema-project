@@ -11,7 +11,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 @Configuration
-@ComponentScan(basePackages = {"com.dev.cinema"})
+@ComponentScan(basePackages = {
+        "com.dev.cinema.dao",
+        "com.dev.cinema.service"
+})
 @PropertySource("classpath:db.properties")
 public class AppConfig {
     private final Environment environment;
