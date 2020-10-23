@@ -5,7 +5,8 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-public class MovieResponseDto {
-    private Long movieId;
-    private String title;
+public class UserRequestDto {
+    private String name;
+    private String password;
+    private String email;
 }

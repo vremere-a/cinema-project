@@ -1,10 +1,11 @@
-package com.dev.cinema.model.dto;
+package com.dev.cinema.model.dto.movie;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Data
 @Component
-public class MovieRequestDto {
+public class MovieResponseDto {
+    private Long movieId;
     private String title;
 }

@@ -5,8 +5,6 @@ import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.model.Movie;
 import java.util.List;
 
-import com.dev.cinema.model.ShoppingCart;
-import com.dev.cinema.model.User;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

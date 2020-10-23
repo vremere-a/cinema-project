@@ -1,8 +1,6 @@
 package com.dev.cinema.dao;
 
 import com.dev.cinema.model.Movie;
-import com.dev.cinema.model.ShoppingCart;
-import com.dev.cinema.model.User;
 
 import java.util.List;
 

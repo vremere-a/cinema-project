@@ -1,14 +1,13 @@
-package com.dev.cinema.model.dto;
+package com.dev.cinema.model.dto.moviesession;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Data
 @Component
-public class MovieSessionRequestDto {
+public class MovieSessionResponseDto {
     private Long movieSessionId;
     private String showTime;
     private String movieTitle;
-    private String cinemaHall;
-    private Long movieId;
+    private Long cinemaHallId;
 }

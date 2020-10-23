@@ -1,16 +1,12 @@
 package com.dev.cinema.controllers;
 
 import com.dev.cinema.model.Movie;
-import com.dev.cinema.model.MovieSession;
-import com.dev.cinema.model.dto.MovieRequestDto;
-import com.dev.cinema.model.dto.MovieResponseDto;
-import com.dev.cinema.model.dto.MovieSessionResponseDto;
+import com.dev.cinema.model.dto.movie.MovieRequestDto;
+import com.dev.cinema.model.dto.movie.MovieResponseDto;
 import com.dev.cinema.service.MovieService;
-import com.dev.cinema.service.MovieSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
