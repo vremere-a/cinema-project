@@ -25,9 +25,7 @@ public class MovieController {
 
     @PostMapping("/movies")
     public void add(@RequestBody MovieRequestDto movieRequestDto) {
-        Movie movie = new Movie();
-        movie.setTitle(movieRequestDto.getTitle());
-        movieService.add(movie);
+        movieDtoMapper.mapToMovie(movieRequestDto);
     }
 
     @GetMapping("/movies")
