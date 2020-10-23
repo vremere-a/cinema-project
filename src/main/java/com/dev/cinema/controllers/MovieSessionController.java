@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +33,7 @@ public class MovieSessionController {
             @RequestParam("date") LocalDate date) {
         return movieSessionService.findAvailableSessions(movieId, date)
                 .stream()
-                .map(movieSessionDtoMapper::mapToDto)
+                .map(movieSessionDtoMapper::mapMovieSessionResponseDto)
                 .collect(Collectors.toList());
     }
 
@@ -42,5 +43,4 @@ public class MovieSessionController {
 
         movieSessionService.add(movieSession);
     }
-
 }
