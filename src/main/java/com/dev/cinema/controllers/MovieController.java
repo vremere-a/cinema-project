@@ -1,6 +1,7 @@
 package com.dev.cinema.controllers;
 
 import com.dev.cinema.model.Movie;
+import com.dev.cinema.model.dto.movie.MovieDtoMapper;
 import com.dev.cinema.model.dto.movie.MovieRequestDto;
 import com.dev.cinema.model.dto.movie.MovieResponseDto;
 import com.dev.cinema.service.MovieService;
@@ -14,10 +15,12 @@ import java.util.stream.Collectors;
 @RequestMapping("/")
 public class MovieController {
     private final MovieService movieService;
+    private final MovieDtoMapper movieDtoMapper;
 
     @Autowired
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, MovieDtoMapper movieDtoMapper) {
         this.movieService = movieService;
+        this.movieDtoMapper = movieDtoMapper;
     }
 
     @PostMapping("/movies")
@@ -32,14 +35,7 @@ public class MovieController {
     public List<MovieResponseDto> getAllMovies() {
         return movieService.getAll()
                 .stream()
-                .map(MovieController.this::mapMovieResponseDto)
+                .map(movieDtoMapper::mapMovieResponseDto)
                 .collect(Collectors.toList());
-    }
-
-    private MovieResponseDto mapMovieResponseDto(Movie movie) {
-        MovieResponseDto movieResponseDto = new MovieResponseDto();
-        movieResponseDto.setMovieId(movie.getId());
-        movieResponseDto.setTitle(movie.getTitle());
-        return movieResponseDto;
     }
 }
