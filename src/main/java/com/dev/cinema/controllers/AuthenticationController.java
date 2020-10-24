@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthenticationController {
-    @Autowired
-    private final AuthenticationService service;
 
+    private final AuthenticationService service;
+    @Autowired
     public AuthenticationController(AuthenticationService service) {
         this.service = service;
     }

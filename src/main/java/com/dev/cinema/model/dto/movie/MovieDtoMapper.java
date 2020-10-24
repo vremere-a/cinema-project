@@ -13,11 +13,11 @@ public class MovieDtoMapper {
         this.movieService = movieService;
     }
 
-    public MovieRequestDto mapToMovie (MovieRequestDto movieRequestDto) {
+    public Movie mapToMovie (MovieRequestDto movieRequestDto) {
         Movie movie = new Movie();
         movie.setTitle(movieRequestDto.getTitle());
         movieService.add(movie);
-        return movieRequestDto;
+        return movie;
     }
 
     public MovieResponseDto mapMovieResponseDto(Movie movie) {
