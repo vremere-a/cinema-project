@@ -4,7 +4,10 @@ import com.dev.cinema.dao.MovieDao;
 import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.model.Movie;
 import java.util.List;
-
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,8 +15,6 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.criteria.*;
 
 @Log4j
 @Repository

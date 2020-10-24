@@ -8,12 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class MovieDtoMapper {
     private final MovieService movieService;
+
     @Autowired
     public MovieDtoMapper(MovieService movieService) {
         this.movieService = movieService;
     }
 
-    public Movie mapToMovie (MovieRequestDto movieRequestDto) {
+    public Movie mapToMovie(MovieRequestDto movieRequestDto) {
         Movie movie = new Movie();
         movie.setTitle(movieRequestDto.getTitle());
         movieService.add(movie);

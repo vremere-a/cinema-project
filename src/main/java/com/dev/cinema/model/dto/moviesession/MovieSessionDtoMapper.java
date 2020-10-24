@@ -4,11 +4,10 @@ import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class MovieSessionDtoMapper {
@@ -25,6 +24,7 @@ public class MovieSessionDtoMapper {
         this.cinemaHallService = cinemaHallService;
         this.movieService = movieService;
     }
+
     public MovieSessionResponseDto mapMovieSessionResponseDto(MovieSession movieSession) {
         MovieSessionResponseDto movieSessionResponseDto = new MovieSessionResponseDto();
         movieSessionResponseDto.setMovieTitleId(movieSession.getMovie().getId());
@@ -38,9 +38,11 @@ public class MovieSessionDtoMapper {
     public MovieSession mapToMovieSession(MovieSessionRequestDto movieSessionRequestDto) {
         MovieSession movieSession = new MovieSession();
 //        movieSession.setId(movieSessionRequestDto.getId());
-//        movieSession.setShowTime(LocalDateTime.parse(LocalDateTime.parse(movieSessionRequestDto.getShowTime()).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
+//        movieSession.setShowTime(LocalDateTime.parse(LocalDateTime.parse(movieSessionRequestDto.
+//        getShowTime()).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
         movieSession.setShowTime(LocalDateTime.parse(movieSessionRequestDto.getShowTime()));
-        movieSession.setCinemaHall(cinemaHallService.getById(movieSessionRequestDto.getCinemaHallId()));
+        movieSession.setCinemaHall(cinemaHallService
+                .getById(movieSessionRequestDto.getCinemaHallId()));
         movieSession.setMovie(movieService.getById(movieSessionRequestDto.getMovieId()));
         movieSessionService.add(movieSession);
         return movieSession;
