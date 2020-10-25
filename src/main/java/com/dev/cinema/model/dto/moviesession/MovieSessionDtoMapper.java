@@ -40,7 +40,6 @@ public class MovieSessionDtoMapper {
         movieSession.setCinemaHall(cinemaHallService
                 .getById(movieSessionRequestDto.getCinemaHallId()));
         movieSession.setMovie(movieService.getById(movieSessionRequestDto.getMovieId()));
-        movieSessionService.add(movieSession);
         return movieSession;
     }
 }
