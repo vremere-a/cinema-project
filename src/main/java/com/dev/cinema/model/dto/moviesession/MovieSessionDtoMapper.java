@@ -38,8 +38,8 @@ public class MovieSessionDtoMapper {
         MovieSession movieSession = new MovieSession();
         movieSession.setShowTime(movieSessionRequestDto.getShowTime());
         movieSession.setCinemaHall(cinemaHallService
-                .getById(movieSessionRequestDto.getCinemaHallId()));
-        movieSession.setMovie(movieService.getById(movieSessionRequestDto.getMovieId()));
+                .get(movieSessionRequestDto.getCinemaHallId()));
+        movieSession.setMovie(movieService.get(movieSessionRequestDto.getMovieId()));
         return movieSession;
     }
 }

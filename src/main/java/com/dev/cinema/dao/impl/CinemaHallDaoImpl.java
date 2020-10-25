@@ -62,7 +62,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
     }
 
     @Override
-    public CinemaHall getById(Long id) {
+    public CinemaHall get(Long id) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<CinemaHall> criteriaQuery = criteriaBuilder.createQuery(CinemaHall.class);
