@@ -45,6 +45,5 @@ public class MovieSessionController {
     public void add(@RequestBody MovieSessionRequestDto movieSessionRequestDto) {
         MovieSession movieSession = movieSessionService
                 .add(movieSessionDtoMapper.mapToMovieSession(movieSessionRequestDto));
-//        movieSessionDtoMapper.mapToMovieSession(movieSessionRequestDto);
     }
 }
