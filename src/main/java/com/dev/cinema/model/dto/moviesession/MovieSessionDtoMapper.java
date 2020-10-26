@@ -3,7 +3,6 @@ package com.dev.cinema.model.dto.moviesession;
 import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
-import com.dev.cinema.service.MovieSessionService;
 import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +13,7 @@ public class MovieSessionDtoMapper {
     private final MovieService movieService;
 
     @Autowired
-    public MovieSessionDtoMapper( CinemaHallService cinemaHallService,
+    public MovieSessionDtoMapper(CinemaHallService cinemaHallService,
                                  MovieService movieService) {
         this.cinemaHallService = cinemaHallService;
         this.movieService = movieService;
