@@ -1,6 +1,5 @@
 package com.dev.cinema.controllers;
 
-import com.dev.cinema.model.User;
 import com.dev.cinema.model.dto.user.UserDtoMapper;
 import com.dev.cinema.model.dto.user.UserResponseDto;
 import com.dev.cinema.service.UserService;
@@ -23,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/by-email")
-    public UserResponseDto getUserByEmail(@RequestParam ("email")String email) {
+    public UserResponseDto getUserByEmail(@RequestParam("email") String email) {
         return userDtoMapper.mapToResponseDto(userService.findByEmail(email).get());
     }
 }
