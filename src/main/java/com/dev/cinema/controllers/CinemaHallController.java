@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.dev.cinema.model.dto.cinemaHall.CinemaHallDtoMapper;
+import com.dev.cinema.model.dto.cinemaHall.CinemaHallRequestDto;
 import com.dev.cinema.model.dto.cinemaHall.CinemaHallResponseDto;
 import com.dev.cinema.service.CinemaHallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,10 @@ public class CinemaHallController {
                 .stream()
                 .map(cinemaHallDtoMapper::mapToResponseDto)
                 .collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public void add(@RequestBody CinemaHallRequestDto cinemaHallRequestDto) {
+        cinemaHallService.add(cinemaHallDtoMapper.mapToCinemaHall(cinemaHallRequestDto));
     }
 }

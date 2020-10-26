@@ -1,17 +1,16 @@
 package com.dev.cinema.model.dto.cinemaHall;
 
 import com.dev.cinema.model.CinemaHall;
-import com.dev.cinema.model.Movie;
-import com.dev.cinema.model.dto.movie.MovieRequestDto;
-import com.dev.cinema.model.dto.movie.MovieResponseDto;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CinemaHallDtoMapper {
-//    public Movie mapToCinemaHall(MovieRequestDto movieRequestDto) {
-//        CinemaHall cinemaHall = new CinemaHall();
-//        cinemaHall.setTitle(movieRequestDto.getTitle());
-//        return cinemaHall;
+    public CinemaHall mapToCinemaHall(CinemaHallRequestDto cinemaHallRequestDto) {
+        CinemaHall cinemaHall = new CinemaHall();
+        cinemaHall.setDescription(cinemaHallRequestDto.getDescription());
+        cinemaHall.setCapacity(cinemaHallRequestDto.getCapacity());
+        return cinemaHall;
+    }
 
     public CinemaHallResponseDto mapToResponseDto(CinemaHall cinemaHall) {
         CinemaHallResponseDto cinemaHallResponseDto = new CinemaHallResponseDto();
@@ -21,5 +20,3 @@ public class CinemaHallDtoMapper {
         return cinemaHallResponseDto;
     }
 }
-//    }
-//}
