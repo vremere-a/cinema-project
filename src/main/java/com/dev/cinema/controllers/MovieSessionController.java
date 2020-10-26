@@ -1,6 +1,5 @@
 package com.dev.cinema.controllers;
 
-import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.model.dto.moviesession.MovieSessionDtoMapper;
 import com.dev.cinema.model.dto.moviesession.MovieSessionRequestDto;
 import com.dev.cinema.model.dto.moviesession.MovieSessionResponseDto;
@@ -37,13 +36,12 @@ public class MovieSessionController {
             @RequestParam("date") LocalDate date) {
         return movieSessionService.findAvailableSessions(movieId, date)
                 .stream()
-                .map(movieSessionDtoMapper::mapMovieSessionResponseDto)
+                .map(movieSessionDtoMapper::mapToResponseDto)
                 .collect(Collectors.toList());
     }
 
     @PostMapping
     public void add(@RequestBody MovieSessionRequestDto movieSessionRequestDto) {
-        MovieSession movieSession = movieSessionService
-                .add(movieSessionDtoMapper.mapToMovieSession(movieSessionRequestDto));
+        movieSessionService.add(movieSessionDtoMapper.mapToMovieSession(movieSessionRequestDto));
     }
 }

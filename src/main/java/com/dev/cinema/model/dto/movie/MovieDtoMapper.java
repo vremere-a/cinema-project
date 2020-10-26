@@ -17,11 +17,10 @@ public class MovieDtoMapper {
     public Movie mapToMovie(MovieRequestDto movieRequestDto) {
         Movie movie = new Movie();
         movie.setTitle(movieRequestDto.getTitle());
-        movieService.add(movie);
         return movie;
     }
 
-    public MovieResponseDto mapMovieResponseDto(Movie movie) {
+    public MovieResponseDto mapToResponseDto(Movie movie) {
         MovieResponseDto movieResponseDto = new MovieResponseDto();
         movieResponseDto.setMovieId(movie.getId());
         movieResponseDto.setTitle(movie.getTitle());

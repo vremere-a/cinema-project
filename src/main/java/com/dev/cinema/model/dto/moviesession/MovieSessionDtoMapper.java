@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MovieSessionDtoMapper {
-
     private final MovieSessionService movieSessionService;
     private final CinemaHallService cinemaHallService;
     private final MovieService movieService;
@@ -24,9 +23,9 @@ public class MovieSessionDtoMapper {
         this.movieService = movieService;
     }
 
-    public MovieSessionResponseDto mapMovieSessionResponseDto(MovieSession movieSession) {
+    public MovieSessionResponseDto mapToResponseDto(MovieSession movieSession) {
         MovieSessionResponseDto movieSessionResponseDto = new MovieSessionResponseDto();
-        movieSessionResponseDto.setMovieTitleId(movieSession.getMovie().getId());
+        movieSessionResponseDto.setMovieId(movieSession.getMovie().getId());
         movieSessionResponseDto.setCinemaHallId(movieSession.getCinemaHall().getId());
         movieSessionResponseDto.setShowTime(
                 movieSession.getShowTime().format(DateTimeFormatter.ISO_LOCAL_DATE));

@@ -28,7 +28,7 @@ public class MovieController {
 
     @PostMapping
     public void add(@RequestBody MovieRequestDto movieRequestDto) {
-        movieDtoMapper.mapToMovie(movieRequestDto);
+        movieService.add(movieDtoMapper.mapToMovie(movieRequestDto));
     }
 
     @GetMapping
@@ -36,7 +36,7 @@ public class MovieController {
     public List<MovieResponseDto> getAllMovies() {
         return movieService.getAll()
                 .stream()
-                .map(movieDtoMapper::mapMovieResponseDto)
+                .map(movieDtoMapper::mapToResponseDto)
                 .collect(Collectors.toList());
     }
 }

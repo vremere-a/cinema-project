@@ -8,4 +8,5 @@ import org.springframework.stereotype.Component;
 public class MovieResponseDto {
     private Long movieId;
     private String title;
+    private String description;
 }

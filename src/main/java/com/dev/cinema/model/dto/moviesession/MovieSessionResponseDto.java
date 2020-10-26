@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 public class MovieSessionResponseDto {
     private Long movieSessionId;
     private String showTime;
-    private Long movieTitleId;
+    private Long movieId;
     private Long cinemaHallId;
 }
