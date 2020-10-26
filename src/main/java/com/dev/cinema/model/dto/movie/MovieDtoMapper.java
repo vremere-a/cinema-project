@@ -1,19 +1,10 @@
 package com.dev.cinema.model.dto.movie;
 
 import com.dev.cinema.model.Movie;
-import com.dev.cinema.service.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MovieDtoMapper {
-    private final MovieService movieService;
-
-    @Autowired
-    public MovieDtoMapper(MovieService movieService) {
-        this.movieService = movieService;
-    }
-
     public Movie mapToMovie(MovieRequestDto movieRequestDto) {
         Movie movie = new Movie();
         movie.setTitle(movieRequestDto.getTitle());
