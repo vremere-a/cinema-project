@@ -23,6 +23,6 @@ public class UserController {
 
     @GetMapping("/by-email")
     public UserResponseDto getUserByEmail(@RequestParam("email") String email) {
-        return userDtoMapper.mapToResponseDto(userService.findByEmail(email).get());
+        return userDtoMapper.mapToResponseDto(userService.findByEmail(email));
     }
 }
