@@ -59,4 +59,13 @@ public class UserDaoImpl implements UserDao {
             return session.createQuery(criteriaQuery).uniqueResultOptional();
         }
     }
+
+    @Override
+    public Optional<User> findById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return Optional.ofNullable(session.get(User.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't find User with id: " + id, e);
+        }
+    }
 }
