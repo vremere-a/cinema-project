@@ -1,7 +1,5 @@
 package com.dev.cinema.controllers;
 
-import com.dev.cinema.model.MovieSession;
-import com.dev.cinema.model.User;
 import com.dev.cinema.model.dto.cart.ShoppingCartDtoMapper;
 import com.dev.cinema.model.dto.cart.ShoppingCartResponseDto;
 import com.dev.cinema.service.MovieSessionService;

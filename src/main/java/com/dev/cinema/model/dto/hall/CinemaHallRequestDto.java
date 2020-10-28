@@ -1,4 +1,4 @@
-package com.dev.cinema.model.dto.cinemaHall;
+package com.dev.cinema.model.dto.hall;
 
 import lombok.Data;
 

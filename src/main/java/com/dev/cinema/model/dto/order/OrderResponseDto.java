@@ -1,8 +1,8 @@
 package com.dev.cinema.model.dto.order;
 
-import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class OrderResponseDto {
