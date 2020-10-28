@@ -28,7 +28,6 @@ public class CinemaHallController {
     }
 
     @GetMapping
-    @ResponseBody
     public List<CinemaHallResponseDto> getAlCinemaHalls() {
         return cinemaHallService.getAll()
                 .stream()

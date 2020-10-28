@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 public class ShoppingCartDtoMapper {
     public ShoppingCartResponseDto mapToResponseDto(ShoppingCart shoppingCart) {
         ShoppingCartResponseDto cartResponseDto = new ShoppingCartResponseDto();
-        cartResponseDto.setCartId(shoppingCart.getUser().getId());
+        cartResponseDto.setCartId(shoppingCart.getId());
         List<Long> ticketsId = shoppingCart.getTickets()
                 .stream()
                 .map(Ticket::getId)
                 .collect(Collectors.toList());
-        cartResponseDto.setTicketsId(ticketsId);
+        cartResponseDto.setTicketsIds(ticketsId);
         return cartResponseDto;
     }
 }

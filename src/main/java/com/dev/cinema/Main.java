@@ -92,7 +92,7 @@ public class Main {
             log.warn("Incorrect username or password");
         }
 
-        User user2 = userService.findByEmail("arts2@ukr.net");
+        User user2 = userService.findByEmail("arts2@ukr.net").get();
 
         authenticationService.register("arts3@ukr.net", "12345");
         try {
@@ -101,7 +101,7 @@ public class Main {
             log.warn("Incorrect username or password");
         }
 
-        User user3 = userService.findByEmail("arts3@ukr.net");
+        User user3 = userService.findByEmail("arts3@ukr.net").get();
 
         ShoppingCartService shoppingCartService = context.getBean(ShoppingCartService.class);
         ShoppingCart userShoppingCart3 = shoppingCartService.getByUser(user3);

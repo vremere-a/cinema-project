@@ -11,7 +11,7 @@ public class OrderDtoMapper {
         OrderResponseDto orderResponseDto = new OrderResponseDto();
         orderResponseDto.setId(order.getId());
         orderResponseDto.setUserId(order.getUser().getId());
-        orderResponseDto.setTicketsId(order.getTickets()
+        orderResponseDto.setTicketsIds(order.getTickets()
                 .stream()
                 .map(Ticket::getId)
                 .collect(Collectors.toList()));
