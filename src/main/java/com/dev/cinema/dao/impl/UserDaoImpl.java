@@ -2,7 +2,6 @@ package com.dev.cinema.dao.impl;
 
 import com.dev.cinema.dao.UserDao;
 import com.dev.cinema.exeptions.DataProcessingException;
-import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.User;
 import java.util.Optional;
 import javax.persistence.criteria.CriteriaBuilder;
