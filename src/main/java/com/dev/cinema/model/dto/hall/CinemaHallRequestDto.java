@@ -1,8 +1,7 @@
 package com.dev.cinema.model.dto.hall;
 
-import lombok.Data;
-
 import javax.validation.constraints.NotNull;
+import lombok.Data;
 
 @Data
 public class CinemaHallRequestDto {

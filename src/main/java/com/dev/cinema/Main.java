@@ -86,20 +86,12 @@ public class Main {
 
         AuthenticationService authenticationService = context.getBean(AuthenticationService.class);
         authenticationService.register("arts2@ukr.net", "1234");
-//        try {
-//            authenticationService.login("arts2@ukr.net", "1234");
-//        } catch (AuthenticationException e) {
-            log.warn("Incorrect username or password");
-//        }
+        log.warn("Incorrect username or password");
 
         User user2 = userService.findByEmail("arts2@ukr.net").get();
 
         authenticationService.register("arts3@ukr.net", "12345");
-//        try {
-//            authenticationService.login("arts3@ukr.net", "12345");
-//        } catch (AuthenticationException e) {
-            log.warn("Incorrect username or password");
-//        }
+        log.warn("Incorrect username or password");
 
         User user3 = userService.findByEmail("arts3@ukr.net").get();
 

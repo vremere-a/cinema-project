@@ -2,9 +2,9 @@ package com.dev.cinema.model.dto.user;
 
 import com.dev.cinema.validation.EmailValidation;
 import com.dev.cinema.validation.FieldsValueMatch;
-import lombok.Data;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.Data;
 
 @FieldsValueMatch.List({
         @FieldsValueMatch(
