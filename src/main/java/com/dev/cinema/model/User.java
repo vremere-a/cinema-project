@@ -26,7 +26,7 @@ public class User {
     @NotNull
     @Column(name = "user_password")
     private String password;
-    private byte[] salt;
+//    private byte[] salt;
 
     public User(String email, String password) {
         this.email = email;

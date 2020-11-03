@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
@@ -36,7 +38,7 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public void completeOrder(Authentication authentication) {
+    public void completeOrder(@Valid Authentication authentication) {
         String email = ((UserDetails) authentication.getPrincipal()).getUsername();
         User user = userService.findByEmail(email).get();
         orderService.completeOrder(
