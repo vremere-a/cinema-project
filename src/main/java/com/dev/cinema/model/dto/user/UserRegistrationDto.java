@@ -6,19 +6,19 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
 
-@FieldsValueMatch.List({
-        @FieldsValueMatch(
-                field = "password",
-                fieldMatch = "repeatPassword",
-                message = "Passwords do not match!"
-        )
-})
+@FieldsValueMatch(
+        field = "password",
+        fieldMatch = "repeatPassword",
+        message = "Passwords do not match!"
+)
 @Data
 public class UserRegistrationDto {
     @EmailValidation
     private String email;
-    @NotNull
-    @Size(min = 4)
+    @NotNull(message = "password can't be null")
+    @Size(min = 8, message = "password should have at least 8 characters")
     private String password;
+    @NotNull(message = "repeat password can't be null")
+    @Size(min = 8, message = "password should have at least 8 characters")
     private String repeatPassword;
 }

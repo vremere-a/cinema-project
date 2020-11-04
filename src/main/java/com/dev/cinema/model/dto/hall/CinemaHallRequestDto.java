@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class CinemaHallRequestDto {
-    @NotNull
-    private int capacity;
+    @NotNull(message = "capacity shouldn't be null")
+    private Integer capacity;
     private String description;
 }
