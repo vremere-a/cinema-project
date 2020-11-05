@@ -1,23 +1,29 @@
 package com.dev.cinema.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final PasswordEncoder encoder;
+    private final UserDetailsService userDetailsService;
+
+    @Autowired
+    public SecurityConfig(PasswordEncoder encoder, UserDetailsService userDetailsService) {
+        this.encoder = encoder;
+        this.userDetailsService = userDetailsService;
+    }
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder managerBuilder) throws Exception {
         managerBuilder
-                .inMemoryAuthentication()
-                .withUser("qw@uk.net")
-                .password(getEncoder().encode("qwer"))
-                .roles("USER");
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(encoder);
     }
 
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -31,10 +37,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .csrf().disable();
-    }
-
-    @Bean
-    public PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder();
     }
 }
