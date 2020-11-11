@@ -1,14 +1,18 @@
 package com.dev.cinema.model;
 
 import com.sun.istack.NotNull;
-
-import javax.persistence.*;
-
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import java.util.List;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -26,7 +30,7 @@ public class User {
     @Column(name = "user_password")
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> userRole;
 
     public User(String email, String password) {

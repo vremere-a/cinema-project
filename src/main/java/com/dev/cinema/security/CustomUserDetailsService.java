@@ -2,14 +2,12 @@ package com.dev.cinema.security;
 
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
+import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.security.core.userdetails.User.UserBuilder;
-
-import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -26,7 +24,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserBuilder builder = null;
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            builder = org.springframework.security.core.userdetails.User.withUsername(user.getEmail());
+            builder = org.springframework.security.core
+                    .userdetails.User.withUsername(user.getEmail());
             builder.password(user.getPassword());
             String[] roles = user.getUserRole()
                     .stream()

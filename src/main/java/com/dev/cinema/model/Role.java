@@ -1,8 +1,13 @@
 package com.dev.cinema.model;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Data;
-
-import javax.persistence.*;
 
 @Entity
 @Data
@@ -14,6 +19,6 @@ public class Role {
     private Long id;
 
     @Enumerated(value = EnumType.STRING)
-    private RoleName RoleName;
+    private RoleName roleName;
 
 }
