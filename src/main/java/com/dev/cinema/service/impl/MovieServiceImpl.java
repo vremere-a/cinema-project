@@ -6,6 +6,7 @@ import com.dev.cinema.service.MovieService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -16,16 +17,19 @@ public class MovieServiceImpl implements MovieService {
         this.movieDao = movieDao;
     }
 
+    @Transactional
     @Override
     public Movie add(Movie movie) {
         return movieDao.add(movie);
     }
 
+    @Transactional
     @Override
     public List<Movie> getAll() {
         return movieDao.getAll();
     }
 
+    @Transactional
     @Override
     public Movie get(Long id) {
         return movieDao.get(id);

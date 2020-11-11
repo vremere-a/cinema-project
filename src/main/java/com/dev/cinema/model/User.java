@@ -1,15 +1,14 @@
 package com.dev.cinema.model;
 
 import com.sun.istack.NotNull;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -26,6 +25,9 @@ public class User {
     @NotNull
     @Column(name = "user_password")
     private String password;
+
+    @ManyToMany
+    private Set<Role> userRole;
 
     public User(String email, String password) {
         this.email = email;
