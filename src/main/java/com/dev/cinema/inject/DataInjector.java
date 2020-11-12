@@ -5,10 +5,10 @@ import com.dev.cinema.model.User;
 import com.dev.cinema.service.RoleService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
+import java.util.Set;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import javax.annotation.PostConstruct;
-import java.util.Set;
 
 @Component
 public class DataInjector {
@@ -20,7 +20,9 @@ public class DataInjector {
     private final ShoppingCartService cartService;
 
     @Autowired
-    public DataInjector(RoleService roleService, UserService userService, ShoppingCartService cartService) {
+    public DataInjector(RoleService roleService,
+                        UserService userService,
+                        ShoppingCartService cartService) {
         this.roleService = roleService;
         this.userService = userService;
         this.cartService = cartService;

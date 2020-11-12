@@ -3,11 +3,11 @@ package com.dev.cinema.dao.impl;
 import com.dev.cinema.dao.RoleDao;
 import com.dev.cinema.exeptions.DataProcessingException;
 import com.dev.cinema.model.Role;
-
-import javax.persistence.criteria.*;
-
 import com.dev.cinema.model.RoleName;
-import com.dev.cinema.model.ShoppingCart;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -58,14 +58,5 @@ public class RoleDaoImpl implements RoleDao {
             criteriaQuery.select(roleRoot).where(predicate);
             return session.createQuery(criteriaQuery).getSingleResult();
         }
-//        try (Session session = sessionFactory.openSession()) {
-//            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-//            CriteriaQuery<Role> roleCriteriaQuery = criteriaBuilder.createQuery(Role.class);
-//            Root<Role> roleRoot = roleCriteriaQuery.from(Role.class);
-//            roleRoot.fetch("roleName", JoinType.LEFT);
-//            Predicate predicate = criteriaBuilder.equal(roleRoot.get("user"), user);
-//            roleCriteriaQuery.select(roleRoot).where(predicate);
-//            return session.createQuery(roleCriteriaQuery).getSingleResult();
-//        }
     }
 }
