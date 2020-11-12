@@ -5,7 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackages = {"com.dev.cinema.controllers"})
+@ComponentScan(basePackages = {
+        "com.dev.cinema.controllers",
+})
+
 @EnableWebMvc
 public class WebConfig {
 }
