@@ -17,19 +17,16 @@ public class MovieServiceImpl implements MovieService {
         this.movieDao = movieDao;
     }
 
-    @Transactional
     @Override
     public Movie add(Movie movie) {
         return movieDao.add(movie);
     }
 
-    @Transactional
     @Override
     public List<Movie> getAll() {
         return movieDao.getAll();
     }
 
-    @Transactional
     @Override
     public Movie get(Long id) {
         return movieDao.get(id);

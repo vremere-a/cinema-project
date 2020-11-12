@@ -1,6 +1,7 @@
 package com.dev.cinema.service.impl;
 
 import com.dev.cinema.model.Role;
+import com.dev.cinema.model.RoleName;
 import com.dev.cinema.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role getRoleByName(String roleName) {
+    public Role getRoleByName(RoleName roleName) {
         return roleService.getRoleByName(roleName);
     }
 }
