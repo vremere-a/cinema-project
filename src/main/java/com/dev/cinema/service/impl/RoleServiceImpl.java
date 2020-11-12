@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
-    private RoleService roleService;
+    private final RoleService roleService;
+
+    public RoleServiceImpl(RoleService roleService) {
+        this.roleService = roleService;
+    }
 
     @Override
     public void add(Role role) {

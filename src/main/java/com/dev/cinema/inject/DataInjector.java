@@ -38,9 +38,8 @@ public class DataInjector {
         User admin = new User();
         admin.setEmail("a@ukr.net");
         admin.setPassword("qwer");
-        admin.setUserRoles(Set.of(userRole));
+        admin.setUserRoles(Set.of(adminRole));
         userService.add(admin);
-        cartService.registerNewShoppingCart(admin);
 
         User user = new User();
         user.setEmail("u@ukr.net");
