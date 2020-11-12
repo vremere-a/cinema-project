@@ -32,9 +32,4 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> userRoles;
-
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
 }

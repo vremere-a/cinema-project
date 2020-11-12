@@ -2,11 +2,7 @@ package com.dev.cinema;
 
 import com.dev.cinema.config.AppConfig;
 import com.dev.cinema.exeptions.AuthenticationException;
-import com.dev.cinema.model.CinemaHall;
-import com.dev.cinema.model.Movie;
-import com.dev.cinema.model.MovieSession;
-import com.dev.cinema.model.ShoppingCart;
-import com.dev.cinema.model.User;
+import com.dev.cinema.model.*;
 import com.dev.cinema.security.interfaces.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
@@ -16,6 +12,8 @@ import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
+
 import lombok.extern.log4j.Log4j;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

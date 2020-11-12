@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.NonNull;
 
 @Entity
 @Data
@@ -18,7 +19,12 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NonNull
     @Enumerated(value = EnumType.STRING)
     private RoleName roleName;
+
+    public static Role of(String roleName) {
+        return new Role(RoleName.valueOf(roleName));
+    }
 
 }
