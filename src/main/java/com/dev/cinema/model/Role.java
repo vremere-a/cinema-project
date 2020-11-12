@@ -7,11 +7,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "role")
 public class Role {
 
@@ -25,6 +30,9 @@ public class Role {
 
     public static Role of(String roleName) {
         return new Role(RoleName.valueOf(roleName));
+    }
+    private Role(RoleName roleName) {
+        this.roleName = roleName;
     }
 
 }

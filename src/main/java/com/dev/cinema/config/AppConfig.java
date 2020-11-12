@@ -18,7 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
         "com.dev.cinema.dao",
         "com.dev.cinema.service",
         "com.dev.cinema.model.dto",
-        "com.dev.cinema.security"
+        "com.dev.cinema.security",
+        "com.dev.cinema.inject"
 })
 public class AppConfig {
     private final Environment environment;
