@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,11 +27,11 @@ public class Role {
     @Enumerated(value = EnumType.STRING)
     private RoleName roleName;
 
-    public static Role of(String roleName) {
-        return new Role(RoleName.valueOf(roleName));
-    }
     private Role(RoleName roleName) {
         this.roleName = roleName;
     }
 
+    public static Role of(String roleName) {
+        return new Role(RoleName.valueOf(roleName));
+    }
 }
